@@ -2,7 +2,6 @@ package FunctionalityChecks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -33,13 +32,12 @@ public class CreateExamsForDifferentGraders {
         driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']")).sendKeys("9th Grade Entrance Exam");
 
         driver.findElement(By.xpath("//span[@class='mat-select-placeholder ng-tns-c211-50 ng-star-inserted']")).click(); //makes the section visible
+        driver.findElement(By.xpath("//span[text()=' 2019 - 2020 time ']")).click();  // selects the dropdown
 
-        driver.findElement(By.xpath("//span[text()=' 2019 - 2020 time ']")).click();  // clicks on it
+        driver.findElement(By.xpath("//span[@class='mat-select-placeholder ng-tns-c211-52 ng-star-inserted']")).click(); //clicks on the grade dropdown
+        driver.findElement(By.xpath("//div//mat-option//span[text()=' 9th Grade ']")).click();
 
-
-//        Select dropdownGradeLevel = new Select(driver.findElement(By.xpath("//div//mat-option//span[text()=' 9th Grade ']")));
-//        dropdownGradeLevel.selectByVisibleText(" 9th Grade ");
-
+        driver.findElement(By.xpath("//button[@class='mat-focus-indicator save-button mat-accent mat-button mat-raised-button mat-button-base ng-star-inserted']")).click();  //save button
 
 
 
