@@ -13,6 +13,8 @@ public class EntranceExamAutomation {
         driver.get("https://basqar.techno.study/");
         driver.manage().window().maximize();
 
+        driver.findElement(By.cssSelector("div.cc-compliance > a")).click();
+
         driver.findElement(By.cssSelector("input[placeholder='Username']")).sendKeys("nigeria_tenant_admin");
         driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("TnvLOl54WxR75vylop2A");
         driver.findElement(By.cssSelector("button[aria-label=\"LOGIN\"]")).click();
@@ -23,6 +25,8 @@ public class EntranceExamAutomation {
         driver.findElement(By.xpath("//span[contains(text(),'Entrance Exams')]")).click();
         driver.findElement(By.xpath("//span[contains(text(),'Entrance Exams')]/../..//span[contains(text(),'Setup')]")).click();
         driver.findElement(By.xpath("//span[contains(text(),'Setup')]/../..//span[contains(text(),'Entrance Exams')]")).click();
+
+
 
 
     }
