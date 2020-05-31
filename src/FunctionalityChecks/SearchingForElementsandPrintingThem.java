@@ -3,11 +3,10 @@ package FunctionalityChecks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
-public class CreateExamsForDifferentGraders {
+public class SearchingForElementsandPrintingThem {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\suler\\Desktop\\Selenium\\chromedriver\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -27,20 +26,6 @@ public class CreateExamsForDifferentGraders {
         driver.findElement(By.xpath("//span[contains(text(),'Entrance Exams')]/../..//span[contains(text(),'Setup')]")).click();
         driver.findElement(By.xpath("//span[contains(text(),'Setup')]/../..//span[contains(text(),'Entrance Exams')]")).click();
 
-        //Create exam fields
-        driver.findElement(By.xpath("//ms-add-button//div//button[@class='mat-focus-indicator mat-button mat-icon-button mat-button-base ng-star-inserted']")).click();
-        driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']")).sendKeys("21th Grade Entrance Exam");
-
-        driver.findElement(By.xpath("//span[text()='Academic Period']")).click(); //makes the section visible
-        driver.findElement(By.xpath("//span[text()=' 2019 - 2020 time ']")).click();  // selects the dropdown
-
-        driver.findElement(By.xpath("//span[text()='Grade Level']")).click(); //clicks on the grade dropdown
-        driver.findElement(By.xpath("//div//mat-option//span[text()=' 21th Grade ']")).click();
-
-        driver.findElement(By.xpath("//button[@class='mat-focus-indicator save-button mat-accent mat-button mat-raised-button mat-button-base ng-star-inserted']")).click();  //save button
-
-
 
     }
-
 }
