@@ -19,6 +19,10 @@ public class EntranceExamAutomation {
 
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
+        //click on Entrance Exams > Setup > Entrance Exams
+        driver.findElement(By.xpath("//span[contains(text(),'Entrance Exams')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Entrance Exams')]/../..//span[contains(text(),'Setup')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Setup')]/../..//span[contains(text(),'Entrance Exams')]")).click();
 
 
     }
