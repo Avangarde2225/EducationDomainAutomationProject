@@ -3,7 +3,9 @@ package FunctionalityChecks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,18 +31,27 @@ public class CreateExamsForDifferentGraders {
 
         //Create exam fields
         driver.findElement(By.xpath("//ms-add-button//div//button[@class='mat-focus-indicator mat-button mat-icon-button mat-button-base ng-star-inserted']")).click();
-        driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']")).sendKeys("21th Grade Entrance Exam");
+        driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']")).sendKeys("67th Grade Entrance Exam");
 
         driver.findElement(By.xpath("//span[text()='Academic Period']")).click(); //makes the section visible
         driver.findElement(By.xpath("//span[text()=' 2019 - 2020 time ']")).click();  // selects the dropdown
 
         driver.findElement(By.xpath("//span[text()='Grade Level']")).click(); //clicks on the grade dropdown
-        driver.findElement(By.xpath("//div//mat-option//span[text()=' 21th Grade ']")).click();
+        driver.findElement(By.xpath("//div//mat-option//span[text()=' 67th Grade ']")).click();
 
         driver.findElement(By.xpath("//button[@class='mat-focus-indicator save-button mat-accent mat-button mat-raised-button mat-button-base ng-star-inserted']")).click();  //save button
 
 
+        //Verify Successfully created message
+        WebDriverWait wait = new WebDriverWait(driver, 5);
 
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ng-tns-c94-75")));
+            System.out.println("Created Successfully!");
+        } catch (Exception e){
+            System.out.println("Could not be created!");
+        }
+        driver.quit();
     }
 
 }
