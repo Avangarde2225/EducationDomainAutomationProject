@@ -17,12 +17,10 @@ public class CreateAndDeleteAndVerify {
         driver.manage().window().maximize();
 
         driver.findElement(By.cssSelector("div.cc-compliance > a")).click();
-
         driver.findElement(By.cssSelector("input[placeholder='Username']")).sendKeys("nigeria_tenant_admin");
         driver.findElement(By.cssSelector("[formcontrolname=\"password\"]")).sendKeys("TnvLOl54WxR75vylop2A");
         driver.findElement(By.cssSelector("button[aria-label=\"LOGIN\"]")).click();
-
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait( 3, TimeUnit.SECONDS );
 
         //Exam Creation and Verification
 
@@ -57,11 +55,24 @@ public class CreateAndDeleteAndVerify {
             System.out.println("Could not be created!");
         }
 
+        driver.findElement(By.cssSelector("toolbar div:nth-child(3) >button")).click();
+
         //Exam Deletion and Verification
 
 
+        driver.findElement(By.cssSelector("tbody tr:first-child ms-delete-button")).click(); //click on delete button
+        driver.findElement(By.cssSelector("mat-dialog-container button[type=\"submit\"]")).click(); // click on yes
 
+        //verification
 
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ng-tns-c94-64")));
+            System.out.println("Exam Deleted Successfully!");
+        } catch (Exception e){
+            System.out.println("Could not be deleted!");
+        }
+
+        driver.quit();
 
     }
 }
