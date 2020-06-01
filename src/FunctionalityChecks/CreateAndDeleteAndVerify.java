@@ -2,6 +2,7 @@ package FunctionalityChecks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,13 +33,16 @@ public class CreateAndDeleteAndVerify {
 
         //Create exam fields
         driver.findElement(By.xpath("//ms-add-button//div//button[@class='mat-focus-indicator mat-button mat-icon-button mat-button-base ng-star-inserted']")).click();
-        driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']")).sendKeys("67th Grade Entrance Exam");
+
+        WebElement entranceExamName = driver.findElement(By.xpath("//div//ms-text-field//input[@id='ms-text-field-0']"));
+        String entranceExam = "67th Grade";
+        entranceExamName.sendKeys(entranceExam);
 
         driver.findElement(By.xpath("//span[text()='Academic Period']")).click(); //makes the section visible
         driver.findElement(By.xpath("//span[text()=' 2019 - 2020 time ']")).click();  // selects the dropdown
 
         driver.findElement(By.xpath("//span[text()='Grade Level']")).click(); //clicks on the grade dropdown
-        driver.findElement(By.xpath("//div//mat-option//span[text()=' 67th Grade ']")).click();
+        driver.findElement(By.xpath("//span[text()='" + entranceExam + " ']")).click();
 
         driver.findElement(By.xpath("//button[@class='mat-focus-indicator save-button mat-accent mat-button mat-raised-button mat-button-base ng-star-inserted']")).click();  //save button
 
@@ -54,6 +58,7 @@ public class CreateAndDeleteAndVerify {
         }
 
         //Exam Deletion and Verification
+
 
 
 
