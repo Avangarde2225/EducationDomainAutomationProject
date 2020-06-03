@@ -1,9 +1,11 @@
 package SeleniumEasyTestNg;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class CheckBoxTestNg {
     // https://www.seleniumeasy.com/test/basic-checkbox-demo.html
@@ -22,7 +24,10 @@ public class CheckBoxTestNg {
         driver.get( "https://www.seleniumeasy.com/test/basic-checkbox-demo.html" );
     }
 
-
+    @Test
+    public void test(){
+        driver.findElement(By.id("isAgeSelected")).click();
+    }
 
 
 
