@@ -2,33 +2,50 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CountingElementsOnPageTestNG {
-    public static void main(String[] args) {
-        System.setProperty( "webdriver.chrome.driver", "C:\\Users\\suler\\Desktop\\Selenium\\chromedriver\\chromedriver.exe" );
-        WebDriver driver = new ChromeDriver();
-        driver.get( "file:///D:/Project/seleniumWorking/src/day3/resources/form.html" );
+    private WebDriver driver;
 
-        List<String> list = Arrays.asList( "h1", "h2", "h3", "p", "input", "option", "br", "select" );
+    @BeforeClass
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\suler\\Desktop\\Selenium\\chromedriver\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("file:///D:/Project/seleniumWorking/src/day3/resources/form.html");
+    }
 
-        List<String> tagsForTesting = new ArrayList<>( list );
-
-        tagsForTesting.add( "form" ); // to check if accepts any more of tags
-
-        for(String tag : tagsForTesting) {
-            printNumberOfElementsOnAPage( driver, tag );
-        }
-
+    @AfterClass
+    public void quit() {
         driver.quit();
     }
 
-    static void printNumberOfElementsOnAPage(WebDriver driver, String tagName) {
-        List<WebElement> elements = driver.findElements( By.tagName( tagName ) );
-        System.out.println( "There is(are) " + elements.size() + " " + tagName + " tag(s) on page!" );
+    @Test(dataProvider = "tagNumberProvider")
+    public void printNumberOfElementsOnAPage(String tagName, int numberOfElements) {
+
+        List<WebElement> elements = driver.findElements(By.tagName(tagName));
+        Assert.assertEquals(elements.size(), numberOfElements);
+
+    }
+
+    @DataProvider
+    public Object[][] tagNumberProvider() {
+       return new Object[][] {
+                {"h1", 1},
+                {"h2, 1"},
+                {"h3", 1},
+                {"p", 6},
+                {"input", 7},
+                {"option", 5},
+                {"br", 6},
+                {"select", 1},
+                {"form", 1}
+        };
     }
 }
 
