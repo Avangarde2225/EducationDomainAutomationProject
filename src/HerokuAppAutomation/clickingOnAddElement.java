@@ -1,0 +1,52 @@
+package HerokuAppAutomation;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+import java.util.List;
+import java.util.PrimitiveIterator;
+
+public class clickingOnAddElement {
+    // http://the-internet.herokuapp.com/add_remove_elements/
+    // write a function that takes a number, and clicks the "Add Element" button
+    // given number of times, and then validate that given number of
+    // "Delete" buttons is displayed
+    private WebDriver driver;
+
+    @BeforeClass
+    public  void main() {
+
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\suler\\Desktop\\Selenium\\chromedriver\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
+
+        clickToValidate(driver,100);
+    }
+
+    @AfterClass
+    public void quit(){
+        driver.quit();
+    }
+
+    public static void clickToValidate (WebDriver driver,int num){
+        WebElement element = driver.findElement(By.xpath("//button[@onclick='addElement()']"));
+
+        for (int i = 0; i < num; i++) {
+            element.click();
+        }
+
+        List<WebElement> list = driver.findElements(By.xpath("//button[@class='added-manually']"));
+        if (list.size() == num) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Failure");
+        }
+
+    }
+
+
+}
