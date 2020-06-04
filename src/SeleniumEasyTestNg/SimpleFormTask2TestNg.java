@@ -7,10 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -37,16 +34,18 @@ public class SimpleFormTask2TestNg {
         driver.findElement(By.cssSelector("div#at-cv-lightbox-button-holder> a:nth-child(2)")).click();
     }
 
+    @BeforeMethod
+    public void clearTextBoxes(){
+        driver.findElement( By.id( "sum1" ) ).clear();
+        driver.findElement( By.id( "sum2" ) ).clear();
+
+    }
+
         @Test(dataProvider = "integerProvider")
         public void test(Integer number1, Integer number2){
 
-        WebElement sum1 = driver.findElement( By.id( "sum1" ) );
-        sum1.clear();
-        sum1.sendKeys(number1.toString());
-
-        WebElement sum2 =driver.findElement( By.id( "sum2" ) );
-        sum2.clear();
-        sum2.sendKeys( number2.toString() );
+        driver.findElement( By.id( "sum1" ) ).sendKeys(number1.toString());
+        driver.findElement( By.id( "sum2" ) ).sendKeys( number2.toString() );
 
         driver.findElement(By.cssSelector("#gettotal > button")).click();
 
@@ -55,6 +54,7 @@ public class SimpleFormTask2TestNg {
 
     Assert.assertEquals(text, String.valueOf(number1+number2));
     }
+
 
     @DataProvider
     public Object[][] integerProvider(){
