@@ -1,4 +1,4 @@
-package HerokuAppAutomation;
+package HerokuWebAppAutomation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.PrimitiveIterator;
 
 public class clickingOnAddElement {
     // http://the-internet.herokuapp.com/add_remove_elements/

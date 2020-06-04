@@ -1,4 +1,4 @@
-package HerokuAppAutomation;
+package HerokuWebAppAutomation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

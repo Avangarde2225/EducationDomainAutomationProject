@@ -4,7 +4,7 @@
     <parameter name="numberOfTimeToClick" value="50"></parameter>
     <test name="Tests">
         <classes>
-            <class name="HerokuAppAutomation.clickingOnAddElement"/>
+            <class name="HerokuWebAppAutomation.clickingOnDeleteButton"/>
         </classes>
     </test>
 </suite>
