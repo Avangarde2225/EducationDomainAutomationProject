@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -33,10 +34,12 @@ public class clickingOnAddElement {
         driver.quit();
     }
 
+    @Parameters({"numberOfTimeToClick"})
     @Test
-    public void clickToValidate (){
+    public void clickToValidate (String numberOfTimeToClick){
 
-       int num = 100;
+       int num = Integer.parseInt(numberOfTimeToClick);
+
         WebElement element = driver.findElement(By.xpath("//button[@onclick='addElement()']"));
 
         for (int i = 0; i < num; i++) {
