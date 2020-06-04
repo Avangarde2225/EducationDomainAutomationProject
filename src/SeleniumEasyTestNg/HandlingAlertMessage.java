@@ -29,7 +29,7 @@ public class HandlingAlertMessage {
         driver.quit();}
 
         @Test
-        public void test(){
+        public void clickAndConfirm(){
 
         driver.findElement( By.id( "normal-btn-success" ) ).click();
         WebElement message = driver.findElement( By.cssSelector( ".alert-normal-success" ) );
@@ -37,6 +37,15 @@ public class HandlingAlertMessage {
         String text = message.getText().replace( button.getText(), "" ).trim();
         String test = "I'm a normal success message. To close use the appropriate button.";
         Assert.assertEquals(text, test);
+    }
+
+    @Test
+    public void hidingTheMessage(){
+        driver.findElement( By.id( "normal-btn-success" ) ).click();
+        driver.findElement( By.cssSelector( ".alert-normal-success > button" )).click();
+        WebElement message = driver.findElement( By.cssSelector( ".alert-normal-success" ) );
+
+        Assert.assertFalse(message.isDisplayed());
 
     }
 }
