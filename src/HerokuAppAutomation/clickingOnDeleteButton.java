@@ -5,10 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -33,24 +30,25 @@ public class clickingOnDeleteButton {
     public void quit() {
         driver.quit();
     }
-
+    @Parameters({"numberOfTimeToClick"})
     @BeforeMethod
-    public void clickAndValidateButtons() {
+    public void clickAndValidateButtons(String numberOfTimeToClick) {
         WebElement btn = driver.findElement(By.xpath("//*[@onclick='addElement()']"));
-        int num = 50;
+        int num = Integer.parseInt(numberOfTimeToClick);
         for (int i = 0; i < num; i++) {
             btn.click();
         }
     }
 
+    @Parameters({"numberOfTimeToClick"})
     @Test
-    public void deleteAndQuit() {
+    public void deleteAndQuit(String numberOfTimeToClick) {
         List<WebElement> elements = driver.findElements(By.xpath("//*[@onclick='deleteElement()']"));
         int sizeBeforeDeleting = elements.size();
 
         List<WebElement> buttonsToDelete = driver.findElements( By.cssSelector( "[onclick='deleteElement()']" ) );
         int counter = 0;
-        int number = 50;
+        int number = Integer.parseInt(numberOfTimeToClick);
         for(WebElement webElement : buttonsToDelete) {
             counter++;
             if(counter > number) {
