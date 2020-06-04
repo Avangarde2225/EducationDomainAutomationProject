@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.PrimitiveIterator;
@@ -24,7 +26,6 @@ public class clickingOnAddElement {
         driver = new ChromeDriver();
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
 
-        clickToValidate(driver,100);
     }
 
     @AfterClass
@@ -32,7 +33,10 @@ public class clickingOnAddElement {
         driver.quit();
     }
 
-    public static void clickToValidate (WebDriver driver,int num){
+    @Test
+    public void clickToValidate (){
+
+       int num = 100;
         WebElement element = driver.findElement(By.xpath("//button[@onclick='addElement()']"));
 
         for (int i = 0; i < num; i++) {
@@ -40,11 +44,8 @@ public class clickingOnAddElement {
         }
 
         List<WebElement> list = driver.findElements(By.xpath("//button[@class='added-manually']"));
-        if (list.size() == num) {
-            System.out.println("Success");
-        } else {
-            System.out.println("Failure");
-        }
+
+        Assert.assertEquals(list.size(), num);
 
     }
 
