@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -36,15 +37,16 @@ public class SimpleFormTask2TestNg {
         driver.findElement(By.cssSelector("div#at-cv-lightbox-button-holder> a:nth-child(2)")).click();
     }
 
-        @Test
-        public void test(){
+        @Test(dataProvider = "integerProvider")
+        public void test(Integer number1, Integer number2){
 
-        Integer number1 = 100;
-        Integer number2 = 222;
+        WebElement sum1 = driver.findElement( By.id( "sum1" ) );
+        sum1.clear();
+        sum1.sendKeys(number1.toString());
 
-        driver.findElement( By.id( "sum1" ) ).sendKeys( number1.toString() );
-
-        driver.findElement( By.id( "sum2" ) ).sendKeys( number2.toString() );
+        WebElement sum2 =driver.findElement( By.id( "sum2" ) );
+        sum2.clear();
+        sum2.sendKeys( number2.toString() );
 
         driver.findElement(By.cssSelector("#gettotal > button")).click();
 
@@ -52,5 +54,16 @@ public class SimpleFormTask2TestNg {
     String text = driver.findElement( By.id( "displayvalue" ) ).getText();
 
     Assert.assertEquals(text, String.valueOf(number1+number2));
+    }
+
+    @DataProvider
+    public Object[][] integerProvider(){
+        return new Object[][] {
+                {100,22},
+                {22,200},
+                {33,44},
+                {12,45},
+                {22,57}
+        };
     }
 }
