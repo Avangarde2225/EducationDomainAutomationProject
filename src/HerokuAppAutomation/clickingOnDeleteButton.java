@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -19,45 +22,50 @@ public class clickingOnDeleteButton {
     private WebDriver driver;
 
     @BeforeClass
-    public void setUp(){
-
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\suler\\Desktop\\Selenium\\chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
-        clickAndValidateButtons(driver, 100);
-
-        deleteAndQuit(driver, 100);
-
 
     }
+
     @AfterClass
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
-
-
-    private static void clickAndValidateButtons(WebDriver driver, int num) {
+    @BeforeMethod
+    public void clickAndValidateButtons() {
         WebElement btn = driver.findElement(By.xpath("//*[@onclick='addElement()']"));
+        int num = 50;
         for (int i = 0; i < num; i++) {
             btn.click();
         }
     }
 
-    private static void deleteAndQuit(WebDriver driver, int num) {
-        WebElement deleteBtn = driver.findElement( By.xpath("//*[@onclick='deleteElement()']"));
-        for (int i = num; i > 0; i--) {
-            deleteBtn.click();
+    @Test
+    public void deleteAndQuit() {
+        List<WebElement> elements = driver.findElements(By.xpath("//*[@onclick='deleteElement()']"));
+        int sizeBeforeDeleting = elements.size();
+
+        List<WebElement> buttonsToDelete = driver.findElements( By.cssSelector( "[onclick='deleteElement()']" ) );
+        int counter = 0;
+        int number = 50;
+        for(WebElement webElement : buttonsToDelete) {
+            counter++;
+            if(counter > number) {
+                break;
+            }
+            webElement.click();
         }
-        List<WebElement> list = driver.findElements(By.className("added-manually"));
-        if (list.size() == num) {
-            System.out.println("success!");
-        }
-        else
-            System.out.println("fail!");
+
+
+        List<WebElement> elementsAfter = driver.findElements(By.cssSelector("[onclick='deleteElement()']"));
+        int sizeAfterDeleting = elementsAfter.size();
+
+        Assert.assertEquals(sizeAfterDeleting, (sizeBeforeDeleting - number));
 
     }
-
 }
 
 
