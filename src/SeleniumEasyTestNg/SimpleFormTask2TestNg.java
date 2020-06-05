@@ -50,9 +50,9 @@ public class SimpleFormTask2TestNg {
         driver.findElement(By.cssSelector("#gettotal > button")).click();
 
 
-    String text = driver.findElement( By.id( "displayvalue" ) ).getText();
+        String text = driver.findElement( By.id( "displayvalue" ) ).getText();
 
-    Assert.assertEquals(text, String.valueOf(number1+number2));
+        Assert.assertEquals(text, String.valueOf(number1+number2));
     }
 
 
